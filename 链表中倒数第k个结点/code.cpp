@@ -16,12 +16,12 @@ public:
         ListNode* slow = pListHead;
         while(--k > 0)
         {
-            if(fast != NULL && fast->next != NULL)
+            if(fast->next != NULL)
                 fast = fast->next;
-            else if(k != 0)
+            else
                 return NULL;
         }
-        while(fast != NULL && fast->next != NULL)
+        while(fast->next != NULL)
         {
             fast = fast->next;
             slow = slow->next;
