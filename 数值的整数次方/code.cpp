@@ -40,6 +40,9 @@ public:
         if (exponent == 0)
             return 1.0;
         
+        if (exponent == 1)
+            return base;
+        
         long long n = abs((long long)exponent);
         double result = power(base, n >> 1);
         result *= result;
