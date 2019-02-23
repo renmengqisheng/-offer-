@@ -16,7 +16,7 @@ public:
         /*****************
         *思路二
         ****************/
-        int new_exp = abs(exponent);
+        long long new_exp = abs((long long)exponent);
         double cur = base;
         while(new_exp)
         {
@@ -28,3 +28,21 @@ public:
         return exponent > 0? res: 1.0/res;
     }
 };
+
+
+//思路三：
+class Solution {
+public:
+    double power(double base, int exponent) {
+        if (exponent == 0)
+            return 1.0;
+        
+        long long n = abs((long long)exponent);
+        double result = power(base, n >> 1);
+        result *= result;
+        if ((n & 1) == 1) // 如果指数n为奇数，则要再乘一次底数base
+            result *= base;
+         
+        return exponent < 0? 1 / result: result;
+    }
+}
