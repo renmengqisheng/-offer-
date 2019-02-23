@@ -34,6 +34,9 @@ public:
 class Solution {
 public:
     double power(double base, int exponent) {
+        if(base == 0)
+            return 0;
+        
         if (exponent == 0)
             return 1.0;
         
