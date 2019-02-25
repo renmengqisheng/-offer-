@@ -97,9 +97,13 @@ public:
             return false;
         
         int i = 0;
-        while(sequence[i] < sequence[len-1]) i++;
-        while(sequence[i] > sequence[len-1]) i++;
-        if(i != len-1) return false;
+        while(--len)
+        {
+            while(sequence[i] < sequence[len]) i++;
+            while(sequence[i] > sequence[len]) i++;
+            if(i != len) return false;
+            i = 0;
+        }
         return true;
     }
 };
