@@ -13,8 +13,11 @@ public:
         vector<vector<int> > res;
         vector<int> v;
         
-        DFS(root, expectNumber, v, res);
-        sort(res.begin(), res.end(), [](vector<int> a, vector<int> b){return a.size() > b.size();});
+        if(root != NULL)
+        {
+            DFS(root, expectNumber, v, res);
+            sort(res.begin(), res.end(), [](vector<int> a, vector<int> b){return a.size() > b.size();});
+        }
         return res;
     }
     
