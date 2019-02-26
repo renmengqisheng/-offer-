@@ -9,21 +9,19 @@ struct TreeNode {
 };*/
 class Solution {
 public:
+    /*****************************************
+    *思路一
     TreeNode* Convert(TreeNode* pRootOfTree)
     {
-        if(!pRootOfTree)
-            return NULL;
-        
-        if(!pRootOfTree->left && !pRootOfTree->right)
+        if(!pRootOfTree || (!pRootOfTree->left && !pRootOfTree->right))
             return pRootOfTree;
-        
-        TreeNode* newHead = pRootOfTree;
-        while(newHead != NULL && newHead->left != NULL)
-            newHead = newHead->left;
         
         modify(pRootOfTree);
         
-        return newHead;
+        while(pRootOfTree->left != NULL)
+            pRootOfTree = pRootOfTree->left;
+        
+        return pRootOfTree;
     }
     
     void modify(TreeNode*& pRootOfTree)
@@ -51,4 +49,69 @@ public:
             pRootOfTree->right = cur;
         }
     }
+    **********************************/
+    /***************************************
+    *思路二
+    TreeNode* Convert(TreeNode* pRootOfTree)
+    {
+        if(!pRootOfTree) return NULL;
+        
+        stack<TreeNode*> s;
+        TreeNode* cur = pRootOfTree;
+        TreeNode* pre = NULL;
+        bool first = true;
+        while(cur || !s.empty())
+        {
+            while(cur)
+            {
+                s.push(cur);
+                cur = cur->left;
+            }
+            cur = s.top();
+            s.pop();
+            if(first)
+            {
+                pRootOfTree = cur;
+                pre = cur;
+                first = false;
+            }
+            else
+            {
+                cur->left = pre;
+                if(pre) pre->right = cur;
+                pre = cur;
+            }
+            cur = cur->right;
+        }
+        return pRootOfTree;
+    }
+    ***********************************/
+    /***********************************
+    *思路三
+    ***********************************/
+    TreeNode* Convert(TreeNode* pRootOfTree)
+    {
+        if(!pRootOfTree) return NULL;
+        
+        TreeNode* pre = NULL;
+        modify(pRootOfTree, pre);
+        
+        TreeNode* cur = pRootOfTree;
+        while(cur->left) cur = cur->left;
+        return cur;
+    }
+    
+    void modify(TreeNode* root, TreeNode*& pre)
+    {
+        if(!root) return;
+        
+        modify(root->left, pre);
+        
+        root->left = pre;
+        if(pre) pre->right = root;
+        pre = root;
+        
+        modify(root->right, pre);
+    }
+    
 };
