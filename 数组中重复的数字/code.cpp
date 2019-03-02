@@ -27,7 +27,6 @@ public:
     ************************************************************/
     /************************************************************
     *思路二
-    ************************************************************/
     bool duplicate(int numbers[], int length, int* duplication) {
         if(numbers == nullptr || length <= 0) return false;
         
@@ -47,6 +46,31 @@ public:
                 numbers[i] = numbers[t];
                 numbers[t] = t;
             }
+        return false;
+    }
+    ************************************************************/
+    /***********************************************************
+    *思路三
+    ************************************************************/
+    bool duplicate(int numbers[], int length, int* duplication) {
+        if(numbers == nullptr || length <= 0) return false;
+        
+        for(int i = 0; i < length; i++)
+            if(numbers[i] < 0 || numbers[i] >= length)
+                return false;
+        
+        for(int i = 0; i < length; i++)
+        {
+            int index = numbers[i];
+            if(index < 0) index += length;
+            if(numbers[index] < 0)
+            {
+                *duplication = index;
+                return true;
+            }
+            else
+                numbers[index] -= length;
+        }
         return false;
     }
 };
