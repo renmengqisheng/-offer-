@@ -40,21 +40,14 @@ public:
         {
             if(pHead->next && pHead->val == pHead->next->val)
             {
-                pHead = pHead->next;
                 while(pHead->next && pHead->val == pHead->next->val)
-                {
                     pHead = pHead->next;
-                }
                 pre->next = pHead->next;
-                pHead = pHead->next;
             }
-            else
-            {
-                pre = pHead;
-                pHead = pHead->next;
-            }
-            
+            else pre = pHead;
+            pHead = pHead->next;
         }
+        
         return head->next;
     }
 };
