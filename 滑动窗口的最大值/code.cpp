@@ -3,7 +3,7 @@ public:
     vector<int> maxInWindows(const vector<int>& num, unsigned int size)
     {
         vector<int> v;
-        if(num.empty()) return v;
+        if(num.empty() || size == 0) return v;
         deque<int> dq;
         int l = 0;
         int r = 0;
