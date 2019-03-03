@@ -47,7 +47,6 @@ public:
     ****************************************/
     /****************************************
     *思路二
-    ****************************************/
     bool isSymmetrical(TreeNode* pRoot)
     {
         if(!pRoot || !pRoot->left && !pRoot->right) return true;
@@ -62,4 +61,57 @@ public:
         return compare(left->left, right->right) && 
             compare(left->right, right->left);
     }
+    ****************************************/
+    /************************************
+    *思路三
+    bool isSymmetrical(TreeNode* pRoot)
+    {
+        if(!pRoot || !pRoot->left && !pRoot->right) return true;
+        stack<TreeNode*> s;
+        s.push(pRoot->left);
+        s.push(pRoot->right);
+        while(!s.empty())
+        {
+            TreeNode* left = s.top();
+            s.pop();
+            TreeNode* right = s.top();
+            s.pop();
+            if(!left && !right) continue;
+            else if(!left && right || left && !right) return false;
+            else if(left->val != right->val) return false;
+            s.push(left->left);
+            s.push(right->right);
+            s.push(left->right);
+            s.push(right->left);
+        }
+        return true;
+    }
+    *************************************/
+    /************************************
+    *思路四
+    *************************************/
+    bool isSymmetrical(TreeNode* pRoot)
+    {
+        if(!pRoot || !pRoot->left && !pRoot->right) return true;
+        
+        queue<TreeNode*> q;
+        q.push(pRoot->left);
+        q.push(pRoot->right);
+        while(!q.empty())
+        {
+            TreeNode* left = q.front();
+            q.pop();
+            TreeNode* right = q.front();
+            q.pop();
+            if(!left && !right) continue;
+            else if(!left && right || left && !right) return false;
+            else if(left->val != right->val) return false;
+            q.push(left->left);
+            q.push(right->right);
+            q.push(left->right);
+            q.push(right->left);
+        }
+        return true;
+    }
+    
 };
