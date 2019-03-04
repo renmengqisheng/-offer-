@@ -1,5 +1,7 @@
 class Solution {
 public:
+    /********************************************************
+    *思路一
     bool hasPath(char* matrix, int rows, int cols, char* str)
     {
         if(!matrix || !str || rows <= 0 || cols <= 0) return false;
@@ -31,5 +33,32 @@ public:
         flag[i*cols+j] = false;
         return res;
     }
-
+    ********************************************************/
+    /********************************************************
+    *思路二
+    ********************************************************/
+    bool hasPath(char* matrix, int rows, int cols, char* str)
+    {
+        if(!matrix || !str || rows <= 0 || cols <= 0) return false;
+        for(int i = 0; i < rows; i++)
+            for(int j = 0; j < cols; j++)
+                if(hasPath(matrix, rows, cols, str, i, j))
+                    return true;
+        return false;
+    }
+    bool hasPath(char* &matrix, int rows, int cols, char* str, int i, int j)
+    {
+        if(!(*str)) return true; //出口
+        bool res = false;
+        if(i >= 0 && i < rows && j >= 0 && j <cols && matrix[i*cols+j] == *str)
+        {
+            matrix[i*cols+j] = '\0';
+            res = hasPath(matrix, rows, cols, str+1, i-1, j) || 
+                hasPath(matrix, rows, cols, str+1, i+1, j) || 
+                hasPath(matrix, rows, cols, str+1, i, j-1) || 
+                hasPath(matrix, rows, cols, str+1, i, j+1);
+            matrix[i*cols+j] = *str;
+        }
+        return res;
+    }
 };
