@@ -1,2 +1,2 @@
-# 剑指offer+Leetcode
-记录剑指offer和Leetcode刷题的解题思路及相应代码实现
+# 剑指offer
+记录剑指offer刷题的解题思路及相应代码实现
