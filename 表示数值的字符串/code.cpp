@@ -5,7 +5,8 @@ public:
         if(!str) return false;
         bool num = isSignedNum(str);
         if(*str == '.') num = isUnsignedNum(++str) || num; //注意str后移,短路原理
-        if(*str == 'e' || *str == 'E') num = isSignedNum(++str) && num; //注意str后移
+        if(!num) return false;
+        if(*str == 'e' || *str == 'E') num = isSignedNum(++str);//&& num;//注意str后移
         return num && !*str; //注意判断str是否到达末尾
     }
     bool isUnsignedNum(char* &str)
