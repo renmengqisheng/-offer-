@@ -54,7 +54,7 @@ public:
         {
             if(fast->next && fast->next->next)
                 fast = fast->next->next;
-            else nullptr;
+            else return nullptr;
             slow = slow->next;
         }
         fast = pHead;
